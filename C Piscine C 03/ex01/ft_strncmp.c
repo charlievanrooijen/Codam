@@ -1,44 +1,44 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_putchar.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: cvan-roo <marvin@codam.nl>                   +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/06/08 12:24:35 by cvan-roo      #+#    #+#                 */
-/*   Updated: 2023/06/14 14:43:10 by cvan-roo      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
+#include <stdio.h>
 
-#include <unistd.h>
-
-int ft_strncmp(char *s1, char *s2, unsigned int n)
+size_t ft_strlen(const char *str)
 {
-    char char1, char2;
-    int i, score; 
-
-    i = 0;
-    score = 0;
-    while (s1[i] != *"\0" && s2[i] != *"\0")
+    size_t length = 0;
+    while (str[length] != '\0')
     {
-        if(s1[i] > s2[i])
-        {
-            score++;
-        }
-        else if(s1[i] < s2[i])
-        {
-            score--;
-        }
-        i++;
+        length++;
     }
-    return score;
+    return length;
+}
+
+size_t ft_strlcpy(char *dest, const char *src, size_t size)
+{
+    size_t src_len = ft_strlen(src);
+    size_t i;
+
+    if (size == 0)
+        return src_len;
+
+    for (i = 0; i < size - 1 && src[i] != '\0'; i++)
+    {
+        dest[i] = src[i];
+    }
+    dest[i] = '\0';
+
+    return src_len;
 }
 
 int main()
 {
+    char s1[10] = "dest";
+    char s2[] = "ination";
+    
+    printf("s1 = %s\n", s1);
+    printf("s2 = %s\n", s2);
+    
+    size_t res = ft_strlcpy(s1, s2, sizeof(s1));
+    
+    printf("res = %zu\n", res);
+    printf("s1 after copy = %s\n", s1);
 
-    char s1p[10] = "World";
-    char s2p[10] = "Hello";
-    char test = ft_strncmp(s1p, s2p, 3) + 48;
-    write(1, test, 1);
+    return 0;
 }
